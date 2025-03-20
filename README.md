@@ -41,7 +41,7 @@ sudo systemctl status docker
 ## show all container running/stopped
 `sudo  docker ps -a`
 
-## docker inspect container name here test
+## run docker inspect to get container info <test is conatiner name>
 `sudo docker inspect test`
 
 ## stop docker container with name
