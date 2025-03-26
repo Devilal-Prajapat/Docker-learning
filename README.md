@@ -47,8 +47,11 @@ sudo systemctl status docker
 ## stop docker container with name
 `sudo docker stop <conatiner-name>`
 
-## remove all container
+## remove  container
 `sudo docker rm <conatiner-names>`
+
+## remove  container images
+`sudo docker rmi <image-name or id>`
 
 ## build your own conatiner
 `sudo docker build -t <image-name> . `
@@ -58,3 +61,6 @@ sudo systemctl status docker
 
 ## run the docker container for nginx for test
 `sudo docker run --name web01 -d -p 8080:80 nginx`
+
+## run the docker exec command to access conatiner
+`sudo docker exec -it <conatiner-name> bash`
