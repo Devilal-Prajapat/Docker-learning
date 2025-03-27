@@ -97,3 +97,5 @@ Commands:
 * `--privileged = Starting a container like this will give the container full access to the host's devices`
 * `--name  give a userdefined name to container`
 
+## Remove Build Cache
+* 'sudo docker builder prune -a'

@@ -1,0 +1,32 @@
+FROM ubuntu:20.04
+LABEL "Author"="Devilal"
+LABEL "Project"="yocto"
+ENV DEBIAN_FRONTEND=noninteractive
+ENV USER_NAME=test
+ENV PROJECT=test
+RUN apt update && apt install -y sudo build-essential chrpath cpio debianutils diffstat file gawk gcc>
+RUN locale-gen en_US.UTF-8 && update-locale LC_ALL=en_US.UTF-8  LANG=en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+# Create a non-root user 'test' with sudo privileges
+# https://docs.yoctoproject.org/dev/ref-manual/system-requirements.html#required-packages-for-the-bui>
+RUN useradd -m -s /bin/bash $USER_NAME && echo "$USER_NAME ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/>
+
+# Switch to non-root user
+USER $USER_NAME
+VOLUME /home/$USER_NAME/yocto
+ENV BUILD_INPUT_DIR=/home/$USER_NAME/yocto/input
+ENV BUILD_OUTPUT_DIR=/home/$USER_NAME/yocto/output
+RUN mkdir -p $BUILD_INPUT_DIR $BUILD_OUTPUT_DIR
+
+WORKDIR $BUILD_INPUT_DIR
+RUN git clone -b kirkstone git://git.yoctoproject.org/poky
+WORKDIR $BUILD_INPUT_DIR/poky
+CMD ["/bin/bash","-c", "source /home/test/yocto/input/poky/build/oe-init-build-env"]
+#CMD ["/bin/bash"]
+# CMD source /home/test/yocto/input/poky/build/oe-init-build-env && bitbake core-image-minimal
+
+
+
+
+
